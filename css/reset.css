@@ -22,7 +22,7 @@ a {
     color : inherit;       /* 부모 요소의 글자색 상속 */
 }
  
-img {
+images {
     display : block;   /* 이미지 아래 생기는 공백 제거 */
     max-width: 100%;   /* 부모 크기보다 커지지 않게 설정 */
 }

@@ -1,4 +1,4 @@
-const slider = document.querySelector(".bestimg");
+const slider = document.querySelector(".bestimages");
 
 document.querySelector(".next").addEventListener("click", () => {
     slider.scrollBy({
