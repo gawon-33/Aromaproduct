@@ -648,17 +648,14 @@ footer{
     color: #93A091;
 }
 
-/* ==========================================================
-   RESPONSIVE (MOBILE / TABLET)
-   ========================================================== */
 @media (max-width: 900px){
+    /* PC용으로 강제 줄바꿈 해둔 <br class="lb"> 는 모바일에서는 해제 -> 화면 폭에 맞게 자연스럽게 줄바꿈되도록 함 */
+    br.lb{ display: none; }
 
-    /* -------- 공통 -------- */
     .head_wrap, .main, header, .best, .cra, .sig, .scent, footer{
         height: auto;
     }
 
-    /* -------- 헤더 / 네비게이션 -------- */
     header{
         max-width: 100%;
         padding: 0 20px;
@@ -696,112 +693,174 @@ footer{
         padding: 14px 0;
     }
 
-    /* -------- 히어로 -------- */
-    .head_wrap{ min-height: 100vh; }
+    /* ===== head_wrap : 배경 크롭 완화 + 텍스트 좌측 정렬 + 가독성 강화 ===== */
+    .head_wrap{
+        min-height: 100vh;
+        /* cover 특성상 좁은 화면에서는 이미지 좌우가 크게 잘리므로,
+           어두운 그라데이션을 더 진하게 깔아서 어느 부분이 잘려도 글자는 항상 잘 보이도록 처리 */
+        background-position: center 40%;
+        background-image:
+            linear-gradient(180deg, rgba(12,16,13,.6) 0%, rgba(12,16,13,.45) 30%, rgba(12,16,13,.55) 65%, rgba(8,11,9,.85) 100%),
+            url(../images/head수정.jpg);
+    }
 
     .main{
         min-height: calc(100vh - 76px);
         padding: 0 24px 60px;
+        align-items: flex-end;      /* 텍스트를 화면 아래쪽으로 */
+        justify-content: flex-start;
     }
 
-    .maintext{ max-width: 100%; }
+    .maintext{
+        max-width: 100%;
+        text-align: left;           /* 웹사이트처럼 좌측 정렬 */
+    }
     .maintext::after{ display:none; }
 
-    h1{ font-size: 42px; }
-    .m{ font-size: 16px; margin-bottom: 18px; }
-    .ma{ font-size: 14px; line-height: 1.8; margin-bottom: 36px; }
-    .mai{ width: 170px; height: 46px; font-size: 13px; }
+    h1{
+        font-size: 32px;
+        text-align: left;
+    }
+    .m{
+        font-size: 14px;
+        margin-bottom: 14px;
+        text-align: left;
+        color: #FFFFFF;
+    }
+    .ma{
+        font-size: 13px;
+        line-height: 1.7;
+        margin-bottom: 28px;
+        text-align: left;
+        color: #F1EFE7;             /* 밝은 글자 대신 좀 더 또렷한 톤 + 위 그라데이션 강화로 대비 확보 */
+        text-shadow: 0 1px 6px rgba(0,0,0,.35);
+    }
+    .mai{ width: 150px; height: 44px; font-size: 12px; }
 
-    /* -------- 섹션 라벨 -------- */
     .seller, .sc, .s{
-        font-size: 30px;
-        margin-bottom: 44px;
+        font-size: 26px;
+        line-height: 1.3;           /* 글자 위쪽이 잘려 보이는 것 방지 */
+        padding-top: 4px;
+        margin-bottom: 36px;
     }
 
-    /* -------- BEST SELLER -------- */
-    .best_wrap{ padding: 70px 0; }
+    .best_wrap{ padding: 60px 0; }
     .best{ padding: 0 20px; }
 
-    .item{ flex: 0 0 240px; }
-    .item img{ width: 240px; height: 300px; }
-    .bestext{ font-size: 18px; }
+    .item{ flex: 0 0 220px; }
+    .item img{ width: 220px; height: 275px; }
+    .bestext{ font-size: 16px; }
     .bestext span{ font-size: 12px; }
 
     .prev, .next{
-        width: 38px;
-        height: 38px;
-        font-size: 13px;
+        width: 36px;
+        height: 36px;
+        font-size: 12px;
     }
     .prev{ left: 4px; }
     .next{ right: 4px; }
 
-    /* -------- CRAFTED FROM NATURE -------- */
-    .cra_wrap{ height: auto; min-height: 45vh; }
-    .cra{ height: auto; padding: 70px 24px; }
-    .cra p{ font-size: 24px; }
-    .cra span{ font-size: 14px; }
+    /* ===== cra_wrap : 두께 축소 + 중앙 정렬 확실히 + 강제 줄바꿈 제거로 자연스러운 정렬 ===== */
+    .cra_wrap{ height: auto; min-height: 32vh; }
+    .cra{
+        height: auto;
+        min-height: 32vh;
+        padding: 50px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    .cra p{
+        font-size: 21px;
+        line-height: 1.5;
+        text-align: center;
+        margin: 0 auto;
+    }
+    .cra span{
+        font-size: 13px;
+        text-align: center;
+    }
 
-    /* -------- SIGNATURE OIL -------- */
+    /* ===== sig_wrap : 이미지/텍스트 배치 정리 ===== */
     .sig_wrap{ height: auto; }
     .sig{
         flex-direction: column;
-        gap: 32px;
-        padding: 70px 24px;
+        gap: 24px;
+        padding: 60px 24px;
         align-items: flex-start;
     }
-    .sigimages{ width: 100%; }
-    .sigimages img{ border-radius: 8px; }
+    .sigimages{
+        width: 100%;
+        max-height: 320px;
+        overflow: hidden;
+        border-radius: 8px;
+    }
+    .sigimages img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 8px;
+    }
     .sigtext{ width: 100%; }
-    .o{ font-size: 28px; }
-    .si{ font-size: 14px; margin-bottom: 30px; }
+    .s{ font-size: 15px; margin-bottom: 10px; }
+    .o{ font-size: 24px; margin-bottom: 14px; }
+    .si{ font-size: 13px; line-height: 1.7; margin-bottom: 24px; }
 
-    /* -------- SCENT COLLECTION: 항상 이미지 → 텍스트 순서로 통일 -------- */
-    .scent{ padding: 80px 0 60px; }
+    /* ===== scent_wrap : 상단 타이틀 잘림 방지 + box 레이아웃 정리 ===== */
+    .scent{ padding: 60px 0 50px; }
 
     .box, .box2{
         flex-direction: column;
-        gap: 20px;
-        margin-top: 40px;
-        margin-bottom: 40px;
+        gap: 16px;
+        margin-top: 36px;
+        margin-bottom: 36px;
         padding: 0 24px;
     }
 
     .simages, .simages2{ width: 100%; order: -1; margin-left: 0; margin-right: 0; }
 
-    .simages img{ width: 100%; height: 56vw; max-height: 320px; }
-    .simages2{ height: 56vw; max-height: 320px; }
+    .simages img{ width: 100%; height: 56vw; max-height: 280px; }
+    .simages2{ height: 56vw; max-height: 280px; }
 
     .stext, .stext2{ width: 100%; }
-    .stt{ margin-top: 22px; }
-    .sm{ font-size: 24px; }
-    .sn{ font-size: 14px; margin-bottom: 16px; }
-    .sb{ font-size: 13px; line-height: 1.7; }
-    .sv, .sv2{ margin-top: 20px; margin-left: 0; }
-
-    /* -------- BOTTOM BANNER -------- */
-    .bot_wrap{ height: auto; min-height: 45vh; }
-    .bot{ padding: 60px 24px; }
-    .bot_text{ font-size: 26px; }
-
-    /* -------- FOOTER -------- */
-    .footer_wrap{ padding: 60px 0 30px; }
-    footer{ flex-direction: column; gap: 40px; padding: 0 24px; }
+    .stt{ margin-top: 18px; }
+    .sm{ font-size: 22px; line-height: 1.3; }
+    .sn{ font-size: 13px; line-height: 1.5; margin-bottom: 12px; }
+    .sb{ font-size: 12px; line-height: 1.7; }
+    .sv, .sv2{ margin-top: 16px; margin-left: 0; font-size: 12px; }
+ 
+    .bot_wrap{ height: auto; min-height: 32vh; }
+    .bot{ padding: 50px 24px; }
+    .bot_text{ font-size: 22px; }
+ 
+    /* ===== footer : 전체적으로 한 화면에 들어오도록 컴팩트하게 ===== */
+    .footer_wrap{ padding: 40px 0 24px; }
+    footer{ flex-direction: column; gap: 24px; padding: 0 24px; }
     .ff{ width: 100%; }
     .f{ width: 100%; }
-    .fs{ margin-bottom: 30px; }
+    .fa{ font-size: 24px; margin-bottom: 8px; }
+    .fs{ font-size: 13px; margin-bottom: 18px; }
+    .copy{ font-size: 11px; }
 
-    .fe{ width: 100%; gap: 32px; justify-content: flex-start; }
+    .fe{ width: 100%; gap: 20px; justify-content: flex-start; }
     .info{ min-width: 45%; }
+    .fr{ font-size: 12px; margin-bottom: 8px; }
+    .fy{ font-size: 11px; line-height: 1.6; }
 
     .bottom{
         flex-direction: column;
         align-items: flex-start;
-        gap: 16px;
+        gap: 12px;
+        margin-top: 30px;
+        padding-top: 16px;
     }
+    .bn img{ width: 28px; height: 28px; }
+    .bv{ font-size: 11px; }
 }
 
 @media (max-width: 480px){
-    h1{ font-size: 34px; }
-    .seller, .sc, .s{ font-size: 26px; }
+    h1{ font-size: 28px; }
+    .seller, .sc, .s{ font-size: 22px; }
     .info{ min-width: 100%; }
 }
