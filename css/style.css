@@ -549,7 +549,6 @@ h1{
 
 .footer_wrap{
     width: 100%;
-    background-image: url(../images/밑.jpg);
     background-color: var(--forest);
     padding: 90px 0 40px;
 }
